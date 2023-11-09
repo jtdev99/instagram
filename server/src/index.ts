@@ -3,6 +3,13 @@ import http from "http";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+
+config();
+
+import { env } from "./utils";
+import { connectDb } from "./configs";
+import { instagramRoutes } from "./routes";
 
 const app = express();
 
@@ -17,6 +24,11 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(5050, () => {
-    console.log("Server listening on port 5050");
+server.listen(env.PORT, async () => {
+    const isConnected = await connectDb(env.MONGODB_URI);
+
+    if (isConnected) {
+        console.log("Server listening on port " + env.PORT);
+        instagramRoutes(app);
+    }
 });

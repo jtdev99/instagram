@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "NodeNext",
-        "rootDir": "./src",
+        "rootDir": "./",
         "outDir": "./dist",
         "removeComments": true
     }

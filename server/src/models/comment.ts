@@ -1,13 +1,15 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { InferSchemaType, Schema, model } from "mongoose";
 
 const CommentSchema = new Schema(
     {
         post: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "post",
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "account",
         },
         comment: {
@@ -24,6 +26,8 @@ const CommentSchema = new Schema(
     }
 );
 
-const commentModel = model("comment", CommentSchema);
+type TComment = InferSchemaType<typeof CommentSchema>;
+
+const commentModel = model<TComment>("comment", CommentSchema);
 
 export default commentModel;

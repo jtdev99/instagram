@@ -1,13 +1,15 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { InferSchemaType, Schema, model } from "mongoose";
 
 const FollowSchema = new Schema(
     {
         follower: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "account",
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "account",
         },
     },
@@ -16,6 +18,8 @@ const FollowSchema = new Schema(
     }
 );
 
-const followModel = model("follow", FollowSchema);
+type TFollow = InferSchemaType<typeof FollowSchema>;
+
+const followModel = model<TFollow>("follow", FollowSchema);
 
 export default followModel;

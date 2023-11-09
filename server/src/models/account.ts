@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { InferSchemaType, Schema, model } from "mongoose";
 
 const AccountSchema = new Schema(
     {
@@ -24,6 +24,7 @@ const AccountSchema = new Schema(
         },
         profile: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "profile",
         },
         isPrivate: {
@@ -51,6 +52,8 @@ const AccountSchema = new Schema(
     }
 );
 
-const accountModel = model("account", AccountSchema);
+type TAccount = InferSchemaType<typeof AccountSchema>;
+
+const accountModel = model<TAccount>("account", AccountSchema);
 
 export default accountModel;

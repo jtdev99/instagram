@@ -4,7 +4,7 @@
     "description": "Build api for instagram",
     "main": "src/index.ts",
     "scripts": {
-        "dev:start": "ts-node ./src/index.ts"
+        "dev:start": "nodemon"
     },
     "repository": {
         "type": "git",
@@ -21,7 +21,9 @@
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
+        "envalid": "^8.0.0",
         "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.0.0",
         "typescript": "^5.2.2"
     },
@@ -29,8 +31,10 @@
         "@types/body-parser": "^1.19.5",
         "@types/cookie-parser": "^1.4.6",
         "@types/cors": "^2.8.16",
+        "@types/jsonwebtoken": "^9.0.5",
         "@types/mongoose": "^5.11.97",
         "@types/node": "^20.8.10",
+        "nodemon": "^3.0.1",
         "ts-node": "^10.9.1"
     }
 }

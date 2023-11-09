@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { InferSchemaType, Schema, model } from "mongoose";
 
 const SaveSchema = new Schema(
     {
@@ -12,6 +12,8 @@ const SaveSchema = new Schema(
     }
 );
 
-const saveModel = model("save", SaveSchema);
+type TSave = InferSchemaType<typeof SaveSchema>;
+
+const saveModel = model<TSave>("save", SaveSchema);
 
 export default saveModel;

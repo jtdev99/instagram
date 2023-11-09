@@ -1,13 +1,15 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { InferSchemaType, Schema, model } from "mongoose";
 
 const LikeSchema = new Schema(
     {
         post: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "post",
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "account",
         },
         isLiked: {
@@ -20,6 +22,8 @@ const LikeSchema = new Schema(
     }
 );
 
-const likeModel = model("like", LikeSchema);
+type TLike = InferSchemaType<typeof LikeSchema>;
+
+const likeModel = model<TLike>("like", LikeSchema);
 
 export default likeModel;

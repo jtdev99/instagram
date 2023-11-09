@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { InferSchemaType, Schema, model } from "mongoose";
 
 const PostSchema = new Schema(
     {
@@ -9,6 +9,7 @@ const PostSchema = new Schema(
         },
         author: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "account",
         },
     },
@@ -17,6 +18,8 @@ const PostSchema = new Schema(
     }
 );
 
-const postModel = model("post", PostSchema);
+type TPost = InferSchemaType<typeof PostSchema>;
+
+const postModel = model<TPost>("post", PostSchema);
 
 export default postModel;

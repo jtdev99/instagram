@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { InferSchemaType, Schema, model } from "mongoose";
 
 const ProfileSchema = new Schema(
     {
@@ -17,6 +17,7 @@ const ProfileSchema = new Schema(
         gender: {
             type: Number,
             enum: [0, 1, 2, 3],
+            default: 3,
         },
         bio: {
             type: String,
@@ -28,6 +29,8 @@ const ProfileSchema = new Schema(
     }
 );
 
-const profileModel = model("profile", ProfileSchema);
+type TProfile = InferSchemaType<typeof ProfileSchema>;
+
+const profileModel = model<TProfile>("profile", ProfileSchema);
 
 export default profileModel;
